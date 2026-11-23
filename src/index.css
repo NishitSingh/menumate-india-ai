@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* MenuMate India AI — design tokens.
+   Brand colours are the exact values from the brief. Secondary text (#747474)
+   is used on white surfaces, where it meets WCAG AA for body text; on the cream
+   background we use ink at reduced opacity instead. */
+@theme {
+  --color-cream: #F8F5EF;
+  --color-brand: #176B5B;
+  --color-brand-dark: #0F5246;
+  --color-accent: #F28C45;
+  --color-accent-soft: #FDEEE2;
+  --color-accent-ink: #8A400F;
+  --color-sage: #E7EEE8;
+  --color-ink: #183C36;
+  --color-muted: #747474;
+  --color-line: #E4DED2;
+  --color-danger: #B42318;
+  --color-danger-soft: #FDECEA;
+
+  --font-heading: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --shadow-card: 0 1px 2px rgb(24 60 54 / 0.05), 0 4px 14px rgb(24 60 54 / 0.06);
+  --shadow-lift: 0 2px 6px rgb(24 60 54 / 0.08), 0 16px 36px rgb(24 60 54 / 0.12);
+
+  --radius-card: 14px;
+}
+
+@layer base {
+  html {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    -webkit-tap-highlight-color: transparent;
+    scroll-padding-top: 80px;
+  }
+  body {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.55;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+  .on-brand :focus-visible {
+    outline-color: var(--color-accent);
+  }
+  /* Devanagari (Hindi, Marathi) loads from Google Fonts; other Indic scripts use the device's system fonts. */
+  [lang="hi"], [lang="mr"] {
+    font-family: "Inter", "Noto Sans Devanagari", system-ui, sans-serif;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@utility card {
+  background: #fff;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+@keyframes mm-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+@keyframes mm-rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.mm-rise { animation: mm-rise 0.25s ease-out both; }
+.mm-pulse { animation: mm-pulse 1.4s ease-in-out infinite; }
